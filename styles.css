@@ -1,0 +1,406 @@
+/* ===============================
+   VARIABLES GLOBALES
+=============================== */
+:root {
+    /* Oscuro */
+    --color-bg-dark: #0a0a0f;
+    --color-panel-dark: rgba(18, 18, 25, 0.6);
+    --color-primary-dark: #cfd8dc;
+    --color-secondary-dark: #b0bec5;
+    --color-accent-dark: #e0f7fa;
+    --color-text-dark: #e3e3e3;
+  
+    /* Claro */
+    --color-bg-light: #f9f9ff;
+    --color-panel-light: rgba(255, 255, 255, 0.8);
+    --color-primary-light: #222831;
+    --color-secondary-light: #4b5d67;
+    --color-accent-light: #00bcd4;
+    --color-text-light: #1a1a1a;
+  
+    /* Generales */
+    --color-white-glow: #f8f9fa;
+    --transition-speed: 0.6s;
+    --panel-blur: blur(20px);
+    --font-family: 'Rajdhani', 'Rubik', sans-serif;
+  }
+  
+  /* Tema oscuro */
+  body[data-tema='oscuro'] {
+    --color-bg: var(--color-bg-dark);
+    --color-primary: var(--color-primary-dark);
+    --color-secondary: var(--color-secondary-dark);
+    --color-accent: var(--color-accent-dark);
+    --color-text: var(--color-text-dark);
+    --color-panel: var(--color-panel-dark);
+  }
+  
+  /* Tema claro */
+  body[data-tema='claro'] {
+    --color-bg: var(--color-bg-light);
+    --color-primary: var(--color-primary-light);
+    --color-secondary: var(--color-secondary-light);
+    --color-accent: var(--color-accent-light);
+    --color-text: var(--color-text-light);
+    --color-panel: var(--color-panel-light);
+  }
+  
+  /* ===============================
+     ESTILOS GENERALES
+  =============================== */
+  * {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: background var(--transition-speed), color var(--transition-speed);
+    overflow-x: hidden;
+  }
+  
+  /* Scrollbar */
+  body::-webkit-scrollbar {
+    width: 8px;
+  }
+  body::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent);
+    border-radius: 10px;
+  }
+  
+  /* Textos */
+  h1, h2, h3, p {
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: all 0.4s ease-in-out;
+  }
+  a:hover {
+    color: var(--color-accent);
+    text-shadow: 0 0 6px var(--color-accent);
+  }
+  
+  /* ===============================
+     NAVBAR
+  =============================== */
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    backdrop-filter: var(--panel-blur);
+    background-color: var(--color-panel);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    border-bottom: 1px solid var(--color-secondary);
+    box-shadow: 0 0 30px rgba(200, 200, 255, 0.07);
+  }
+  
+  #nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+    list-style: none;
+  }
+  #nav-links li a {
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+  }
+  #nav-links li a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transform: translateX(-50%);
+    transition: width 0.4s ease;
+  }
+  #nav-links li a:hover::after {
+    width: 100%;
+  }
+  
+  /* ===============================
+     BOTÓN DE TEMA + SELECT
+  =============================== */
+  .controles-navbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  #modo-toggle {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: transform 0.6s;
+  }
+  #modo-toggle:hover {
+    transform: rotate(180deg);
+    color: var(--color-accent);
+  }
+  #idioma-select {
+    background: rgba(240, 240, 255, 0.05);
+    color: var(--color-text);
+    border: 1px solid var(--color-secondary);
+    padding: 0.4rem 0.7rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+  }
+  
+  /* ===============================
+     BOTÓN HAMBURGUESA
+  =============================== */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .menu-toggle span {
+    height: 3px;
+    width: 22px;
+    background-color: var(--color-primary);
+    border-radius: 2px;
+    transition: all 0.4s ease;
+  }
+  .menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+  
+  /* ===============================
+     MENÚ MÓVIL
+  =============================== */
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: flex;
+    }
+    #nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 5%;
+      width: 90%;
+      flex-direction: column;
+      align-items: center;
+      background-color: var(--color-panel);
+      border-radius: 14px;
+      padding: 1.8rem;
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+      transition: all var(--transition-speed);
+    }
+    #nav-links.show {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    #nav-links li {
+      margin: 1rem 0;
+      width: 100%;
+      text-align: center;
+    }
+  }
+  
+  /* ===============================
+     SECCIONES + IMÁGENES
+  =============================== */
+  
+  .section {
+    position: relative;
+    padding: 6rem 2rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background-color: var(--color-panel);
+    backdrop-filter: var(--panel-blur);
+    border-top: 1px solid var(--color-secondary);
+  }
+  
+  .section-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.15;
+    z-index: 0;
+    filter: brightness(1.1) contrast(1.2) blur(2px) saturate(1.2);
+    pointer-events: none;
+  }
+  
+  .section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, rgba(10,10,15,0.85), rgba(20,20,30,0.75));
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    border-radius: inherit;
+  }
+  
+  .section > div {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    padding: 2rem;
+    background-color: rgba(30, 30, 45, 0.3);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(200, 255, 255, 0.05);
+    transition: all 0.4s ease;
+  }
+  .section > div:hover {
+    box-shadow: 0 0 40px rgba(200, 255, 255, 0.15);
+  }
+  
+  .section h1 {
+    font-size: 2.4rem;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+  .section p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+  
+  /* ===============================
+     REVEAL SCROLL
+  =============================== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* ===============================
+     BOTÓN EASTER EGG
+  =============================== */
+  .btn {
+    display: inline-block;
+    padding: 0.2rem 1.6rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: transparent;
+    color: var(--color-primary);
+    border-radius: 8px;
+    transition: all 0.6s ease-in-out;
+  }
+
+  .btn:hover {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    box-shadow: 0 0 12px var(--color-accent), 0 0 22px var(--color-accent);
+    transform: scale(1.06);
+  }
+
+    /* ===============================
+     PANEL DEL EASTER EGG
+  =============================== */
+.easter-panel {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+    pointer-events: none;
+  }
+  
+  /* Mostrar el panel */
+  .easter-panel.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .hidden {
+    display: none;
+  }
+  
+  /* Botones de elección */
+  .easter-btn {
+    padding: 0.8rem 1.4rem;
+    font-size: 1rem;
+    border: 2px solid var(--color-accent);
+    background-color: transparent;
+    color: var(--color-accent);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+  
+  .easter-btn:hover {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    box-shadow: 0 0 8px var(--color-accent), 0 0 16px var(--color-accent);
+  }
+  
+  /* Clase para ocultar */
+  .hidden {
+    display: none;
+  }  
+  
+  /* ===============================
+     RESPONSIVE EXTRA
+  =============================== */
+  @media (max-width: 768px) {
+    .section > div {
+      padding: 1.2rem;
+    }
+    .section h1 {
+      font-size: 1.8rem;
+    }
+    .section p {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .section {
+      padding: 4rem 1rem;
+    }
+    .btn, #idioma-select {
+      font-size: 0.9rem;
+    }
+  }
+  

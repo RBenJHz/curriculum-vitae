@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BenJH-Dev | CV</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+ 
+  <!-- Barra de navegación -->
+  <nav class="navbar">
+    <!-- Botón Hamburguesa -->
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Enlaces de navegación -->
+    <ul id="nav-links">
+      <li><a href="#inicio" class="nav-link" data-i18n="navInicio">Inicio</a></li>
+      <li><a href="#sobre-mi" class="nav-link" data-i18n="navSobreMi">Sobre Mí</a></li>
+      <li><a href="#habilidades" class="nav-link" data-i18n="navHabilidades">Habilidades</a></li>
+      <li><a href="#proyectos" class="nav-link" data-i18n="navProyectos">Proyectos</a></li>
+      <li><a href="#contacto" class="nav-link" data-i18n="navContacto">Contacto</a></li>
+    </ul>
+
+    <!-- Controles de idioma y tema -->
+    <div class="controles-navbar">
+      <select id="idioma-select">
+        <option value="es">ES</option>
+        <option value="en">EN</option>
+        <option value="pt">PT</option>
+      </select>
+      <button id="modo-toggle" aria-label="Modo claro/oscuro">🌙</button>
+    </div>
+  </nav>
+
+  <!-- Contenido principal con scroll -->
+  <div class="scroll-container">
+    
+    <!-- Sección Hero -->
+    <section id="inicio" class="section hero">
+      <div class="hero-content">
+        <img src="images/imagenuno.jpg" alt="Fondo galáctico" class="section-image" />
+        <h1 data-i18n="nombre">Ruben Jaimes</h1>
+        <h2 data-i18n="profesion">Desarrollador Fullstack</h2>
+        <p data-i18n="frase">Construyendo el futuro con visión y tecnología</p>
+        <a href="#" id="easter-egg" class="btn" data-i18n="btn"></a><!-- Botón para el easter egg -->
+        <div id="easter-panel" class="easter-panel hidden">
+            <button class="easter-btn" data-direction="left">Izquierda</button>
+            <button class="easter-btn" data-direction="right">Derecha</button>
+        </div>
+          
+      </div>
+    </section>
+
+    <!-- Sección Sobre mí -->
+    <section id="sobre-mi" class="section">
+      <div>
+        <img src="images/imagendos.jpg" alt="Astronauta perfil" class="section-image" />
+        <h1 data-i18n="sobreMiTitulo">Sobre Mí</h1>
+        <p data-i18n="sobreMiTexto">Soy un apasionado por la tecnología, la inteligencia artificial y el desarrollo de soluciones que impactan positivamente</p>
+      </div>
+    </section>
+
+    <!-- Sección Habilidades -->
+    <section id="habilidades" class="section">
+      <div>
+        <img src="images/imagentres.jpg" alt="Tecnologías flotando en el espacio" class="section-image" />
+        <h1 data-i18n="habilidadesTitulo">Habilidades Técnicas</h1>
+        <p data-i18n="habilidadesTexto">HTML, CSS, JavaScript, Spring Boot, PostgreSQL, MySQL más tecnologías.</p>
+      </div>
+    </section>
+
+    <!-- Sección Proyectos -->
+    <section id="proyectos" class="section">
+      <div>
+        <img src="images/imagencuatro.jpg" alt="Panel de control futurista" class="section-image" />
+        <h1 data-i18n="proyectosTitulo">Proyectos Destacados</h1>
+        <p data-i18n="proyectosTexto">He trabajado en soluciones como SIGA 5000 para gestión avícola con IoT e inteligencia artificial.</p>
+      </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="section">
+      <div>
+        <img src="images/imagencinco.jpg" alt="Contacto desde el espacio" class="section-image" />
+        <h1 data-i18n="contactoTitulo">Contacto</h1>
+        <p data-i18n="contactoTexto">+573162369111</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
